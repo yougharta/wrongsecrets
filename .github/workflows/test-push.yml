@@ -1,9 +1,5 @@
 name: anchore-grype-scanning
-
-on:
-  push:
-    branches: [ "master" ]
-
+on: [push]
 jobs:
   anchore_scan_job:
     runs-on: ubuntu-latest
