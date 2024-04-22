@@ -4,8 +4,7 @@ jobs:
   anchore_scan_job:
     runs-on: ubuntu-latest
     name: Grype code and image scanner
-    permissions:
-       actions: write
+    permissions: write-all
     steps:
     - name: Checkout
       uses: actions/checkout@v2
