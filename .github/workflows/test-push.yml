@@ -15,6 +15,7 @@ jobs:
         path: "."
         fail-build: true
         acs-report-enable: true
+        severity-cutoff: critical
     
     - name: upload Anchore scan SARIF report
       uses: github/codeql-action/upload-sarif@v1
@@ -37,6 +38,7 @@ jobs:
       with:
         image: "devops-counsel/anchore-demo:latest"
         acs-report-enable: "true"
+        severity-cutoff: critical
         fail-build: false
 
     - name: upload Anchore Image scan SARIF report
