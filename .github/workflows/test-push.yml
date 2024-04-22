@@ -3,7 +3,7 @@ on: [push]
 jobs:
   anchore_scan_job:
     runs-on: ubuntu-latest
-    name: Anchore grype security scan
+    name: Anchore grype code security scan
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -13,7 +13,7 @@ jobs:
       uses: anchore/scan-action@v2
       with:
         path: "."
-        fail-build: true
+        fail-build: false
         acs-report-enable: true
         severity-cutoff: critical
     
@@ -21,4 +21,13 @@ jobs:
       uses: github/codeql-action/upload-sarif@v1
       with:
         sarif_file: ${{ steps.scan.outputs.sarif }}
+        
+    - name: Build the container image
+      run: docker build . --file Dockerfile --tag localbuild/testimage:latest
+      
+    - name: Scan the container image
+      uses: anchore/scan-action@v3
+      with:
+        image: "localbuild/testimage:latest"
+        fail-build: true
     
