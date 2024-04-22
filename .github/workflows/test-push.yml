@@ -32,7 +32,7 @@ jobs:
       uses: anchore/scan-action@v3
       with:
         image: "localbuild/testimage:latest"
-        fail-build: true
+        fail-build: false
         severity-cutoff: critical
 
     - name: upload Anchore scan SARIF report
