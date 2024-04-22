@@ -20,12 +20,3 @@ RUN apk add --no-cache libstdc++
 #RUN useradd -u 2000 -m wrongsecrets
 RUN adduser -u 2000 -D wrongsecrets
 USER wrongsecrets
-
-COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar /application.jar
-COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
-COPY --chown=wrongsecrets .github/scripts/.bash_history /home/wrongsecrets/
-COPY --chown=wrongsecrets src/main/resources/executables/ /home/wrongsecrets/
-COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
-COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
-USER wrongsecrets
-CMD java -jar -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D /application.jar
