@@ -3,7 +3,7 @@ on: [push]
 jobs:
   anchore_scan_job:
     runs-on: ubuntu-latest
-    name: Anchore grype code security scan
+    name: Grype code and image scanner
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
         severity-cutoff: critical
     
     - name: upload Anchore scan SARIF report
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: ${{ steps.scan.outputs.sarif }}
         
@@ -33,7 +33,7 @@ jobs:
         severity-cutoff: critical
 
     - name: upload Anchore scan SARIF report
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: ${{ steps.scan.outputs.sarif }}
     
